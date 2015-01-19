@@ -33,6 +33,6 @@ class rebootscheduler ($cron_minute = $rebootscheduler::params::cron_minute,
   $cron_hour = $rebootscheduler::params::cron_hour,
   $cron_weekday = $rebootscheduler::params::cron_weekday) inherits rebootscheduler::params {
 
-  Class['rebootscheduler::config']
+  include rebootscheduler::config
 
 }
