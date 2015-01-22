@@ -17,8 +17,9 @@
 
 class rebootscheduler::params {
 
-  $cron_minute  = '1'
-  $cron_hour    = '1'
-  $cron_weekday = '1'
+  $cron_minute      = '1'
+  $cron_hour        = '1'
+  $cron_weekday     = '1'
+  $disablescheduler = false
 
 }

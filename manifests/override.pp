@@ -21,34 +21,24 @@
 # $cron_minute: '10'
 # $cron_hour: '2'
 # $cron_weekday: '5'
-# $disablescheduler: false
 # Example above means: weekly on Friday at 02:10 (a.m.)
 #
 # USAGE
 #
 # class {'rebootscheduler': }
-# class {'rebootscheduler': cron_minute => '10', cron_hour => '2', cron_weekday => '5', disablescheduler => false, }
+# class {'rebootscheduler': cron_minute => '10', cron_hour => '2', cron_weekday => '5', }
 #
 
-class rebootscheduler ($cron_minute = $rebootscheduler::params::cron_minute,
+class rebootscheduler::override ($cron_minute = $rebootscheduler::params::cron_minute,
   $cron_hour = $rebootscheduler::params::cron_hour,
   $cron_weekday = $rebootscheduler::params::cron_weekday
   $disablescheduler = $rebootscheduler::params::disablescheduler) inherits rebootscheduler::params {
 
-  file {
-    '/usr/local/sbin/reboot.sh':
-      ensure => file,
-      source => 'puppet:///modules/rebootscheduler/usr/local/sbin/reboot.sh',
-      mode   => '0700',
-      owner  => root,
-      group  => root;
-  }
-
   if ($disablescheduler != true) {
     file {
-      '/etc/cron.d/rebootscheduler':
+      '/etc/cron.d/rebootscheduleroverride':
         ensure   => file,
-        content  => template('rebootscheduler/etc/cron.d/rebootscheduler.erb'),
+        content  => template('rebootscheduler/etc/cron.d/rebootscheduleroverride.erb'),
         mode     => '0644',
         owner    => root,
         group    => root;
@@ -56,7 +46,7 @@ class rebootscheduler ($cron_minute = $rebootscheduler::params::cron_minute,
   }
   else {
     file {
-      '/etc/cron.d/rebootscheduler':
+      '/etc/cron.d/rebootscheduleroverride':
         ensure  => 'absent';
     }
   }
