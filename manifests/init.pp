@@ -32,7 +32,7 @@
 
 class rebootscheduler ($cron_minute = $rebootscheduler::params::cron_minute,
   $cron_hour = $rebootscheduler::params::cron_hour,
-  $cron_weekday = $rebootscheduler::params::cron_weekday
+  $cron_weekday = $rebootscheduler::params::cron_weekday,
   $disablescheduler = $rebootscheduler::params::disablescheduler) inherits rebootscheduler::params {
 
   file {
