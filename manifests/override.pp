@@ -21,12 +21,13 @@
 # $cron_minute: '10'
 # $cron_hour: '2'
 # $cron_weekday: '5'
+# $disablescheduler: false
 # Example above means: weekly on Friday at 02:10 (a.m.)
 #
 # USAGE
 #
 # class {'rebootscheduler': }
-# class {'rebootscheduler': cron_minute => '10', cron_hour => '2', cron_weekday => '5', }
+# class {'rebootscheduler': cron_minute => '10', cron_hour => '2', cron_weekday => '5', disablescheduler => false, }
 #
 
 class rebootscheduler::override ($cron_minute = $rebootscheduler::params::cron_minute,
@@ -37,17 +38,21 @@ class rebootscheduler::override ($cron_minute = $rebootscheduler::params::cron_m
   if ($disablescheduler != true) {
     file {
       '/etc/cron.d/rebootscheduleroverride':
-        ensure   => file,
-        content  => template('rebootscheduler/etc/cron.d/rebootscheduleroverride.erb'),
-        mode     => '0644',
-        owner    => root,
-        group    => root;
+        ensure  => file,
+        content => template('rebootscheduler/etc/cron.d/rebootscheduleroverride.erb'),
+        mode    => '0644',
+        owner   => root,
+        group   => root;
     }
   }
   else {
     file {
       '/etc/cron.d/rebootscheduleroverride':
-        ensure  => 'absent';
+        ensure  => file,
+        content => '## PUPPETIZED',
+        mode    => '0644',
+        owner   => root,
+        group   => root;
     }
   }
 
