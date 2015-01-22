@@ -26,8 +26,8 @@
 #
 # USAGE
 #
-# class {'rebootscheduler': }
-# class {'rebootscheduler': cron_minute => '10', cron_hour => '2', cron_weekday => '5', disablescheduler => false, }
+# class {'rebootscheduler::override': }
+# class {'rebootscheduler::override': cron_minute => '10', cron_hour => '2', cron_weekday => '5', disablescheduler => false, }
 #
 
 class rebootscheduler::override ($cron_minute = $rebootscheduler::params::cron_minute,
