@@ -2,7 +2,7 @@ puppet-rebootscheduler
 ======================
 About
 -----
-To automatically schedule a reboot on Ubuntu systems.
+To automatically schedule a reboot on Ubuntu systems, only if a reboot is required (reboot-required file is present).
 
 Note:
 
